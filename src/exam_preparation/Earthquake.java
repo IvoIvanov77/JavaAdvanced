@@ -13,6 +13,7 @@ public class Earthquake {
 
 
         Deque<Integer> waves = new ArrayDeque<>();
+        Deque<Integer> queue = new ArrayDeque<>();
 
         List<Integer> seismicities = new ArrayList<>();
 
@@ -24,34 +25,49 @@ public class Earthquake {
                     .map(Integer::valueOf)
                     .collect(Collectors.toList());
 
-            activity = input.remove(0);
             waves.addAll(input);
-            shiftQueue(waves, shift);
+            System.out.println();
+            System.out.println();
+            System.out.println(waves);
+            while(!queue.isEmpty()){
+                waves.offer(queue.poll());
+            }
+            System.out.println(waves);
+
+            activity = waves.poll();
+
             while(activity >= waves.peek()){
                waves.poll();
+
             }
             seismicities.add(activity);
-            shift = waves.size();
 
+            while(!waves.isEmpty()){
+                queue.offer(waves.poll());
+            }
         }
 
-//        System.out.println(waves);
+        System.out.println();
+        System.out.println(waves);
+        System.out.println();
 
         while(!waves.isEmpty()){
-            System.out.println(seismicities);
+
+
             activity = waves.poll();
             while(!waves.isEmpty() && activity >= waves.peek()){
                 waves.poll();
             }
             seismicities.add(activity);
+            shift = waves.size();
         }
 
         System.out.println(seismicities);
     }
 
-    static void shiftQueue(Deque<Integer> queue, int shift){
-        for (int i = 0; i < shift; i++) {
-            queue.offer(queue.poll());
-        }
-    }
+//    private static void shiftQueue(Deque<Integer> queue, int shift){
+//        for (int i = 0; i < shift; i++) {
+//            queue.offer(queue.poll());
+//        }
+//    }
 }
