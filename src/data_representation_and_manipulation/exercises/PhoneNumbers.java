@@ -26,8 +26,6 @@ public class PhoneNumbers {
 
         Matcher matcher = extractNamesAndPhones(text);
 
-
-
         Map<String, String> phoneList = new LinkedHashMap<>();
 
         while(matcher.find()){
@@ -46,7 +44,8 @@ public class PhoneNumbers {
     }
 
     private static Matcher extractNamesAndPhones(String text){
-        Pattern regex = Pattern.compile("[A-Z][A-Za-z]*[^a-zA-Z+]+\\+*\\d[\\d\\s()./-]+\\d");
+        Pattern regex = Pattern.compile("[A-Z][A-Za-z]*[^a-zA-Z+]*\\+?\\d[\\d\\s()./\\-]*\\d");
+//        String r = "(([A-Z][A-Za-z]*)[^A-Za-z0-9+]*(\\+?[0-9][0-9()/.\\- ]+))";
         return regex.matcher(text);
     }
 
@@ -57,7 +56,7 @@ public class PhoneNumbers {
     }
 
     private static Matcher extractPhones(String text){
-        Pattern regex = Pattern.compile("\\+*\\d[\\d\\s()./-]+\\d");
+        Pattern regex = Pattern.compile("\\+?\\d[\\d\\s()./-]*\\d");
         return regex.matcher(text);
     }
 
