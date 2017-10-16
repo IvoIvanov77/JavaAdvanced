@@ -1,33 +1,30 @@
-package fie_exercises;
+package files_and_streams.exercises;
 
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class AllCapitals {
-
+public class SumBytes {
     public static void main(String[] args) {
 
-        try(BufferedReader reader = Files.newBufferedReader(Paths.get("file1.txt"));
-            PrintWriter out = new PrintWriter(new FileOutputStream("output.txt"))) {
+        try(BufferedReader reader = Files.newBufferedReader(Paths.get("file1.txt"))) {
 
             String line = reader.readLine();
-
+            long sum = 0;
             while(line != null){
-//                out.write(line.toUpperCase());
-                out.println(line.toUpperCase());
+                for(char ch : line.toCharArray()){
+                    sum += ch;
+                }
                 line = reader.readLine();
             }
 
-
+            System.out.println(sum);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
 }

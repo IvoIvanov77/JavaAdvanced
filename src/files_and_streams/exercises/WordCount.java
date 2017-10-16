@@ -1,4 +1,4 @@
-package fie_exercises;
+package files_and_streams.exercises;
 
 
 import java.io.BufferedReader;
