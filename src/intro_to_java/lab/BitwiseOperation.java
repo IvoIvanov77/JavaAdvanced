@@ -40,4 +40,10 @@ public class BitwiseOperation {
         System.out.println("a >>> 2 = " + c );
 
     }
+
+    //remove bit on given index
+    public static int removeBit(int num, int index) {
+        int mask = (1 << index) - 1;
+        return ((num >>> 1) & ~mask) | (num & mask);
+    }
 }

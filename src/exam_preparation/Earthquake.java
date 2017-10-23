@@ -1,73 +1,49 @@
 package exam_preparation;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Earthquake {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner sc = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(reader.readLine());
 
-        int n = Integer.parseInt(sc.nextLine());
+        ArrayDeque<List<Integer>> allNumbers = new ArrayDeque<>();
 
+        List<Integer> input = new ArrayList<>();
 
-        Deque<Integer> waves = new ArrayDeque<>();
-        Deque<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
 
-        List<Integer> seismicities = new ArrayList<>();
-
-        int activity = 0;
-        int shift = 0;
-
-        for (int i = 0; i < n ; i++) {
-            List<Integer> input = Arrays.stream(sc.nextLine().split(" "))
-                    .map(Integer::valueOf)
-                    .collect(Collectors.toList());
-
-            waves.addAll(input);
-            System.out.println();
-            System.out.println();
-            System.out.println(waves);
-            while(!queue.isEmpty()){
-                waves.offer(queue.poll());
+            String[] token = reader.readLine().split(" ");
+            List<Integer> numbers = new ArrayList<>();
+            for (String s : token) {
+                numbers.add(Integer.parseInt(s));
             }
-            System.out.println(waves);
-
-            activity = waves.poll();
-
-            while(activity >= waves.peek()){
-               waves.poll();
-
-            }
-            seismicities.add(activity);
-
-            while(!waves.isEmpty()){
-                queue.offer(waves.poll());
-            }
+            allNumbers.addLast(numbers);
         }
 
-        System.out.println();
-        System.out.println(waves);
-        System.out.println();
-
-        while(!waves.isEmpty()){
-
-
-            activity = waves.poll();
-            while(!waves.isEmpty() && activity >= waves.peek()){
-                waves.poll();
+        while(!allNumbers.isEmpty()){
+            List<Integer> list = allNumbers.poll();
+            int firstNumber = list.get(0);
+            for (int i = 1; i < list.size(); i++) {
+                if(firstNumber < list.get(i)){
+                    allNumbers.addLast(list.subList(i, list.size()));
+                    break;
+                }
             }
-            seismicities.add(activity);
-            shift = waves.size();
+            input.add(firstNumber);
         }
 
-        System.out.println(seismicities);
+        System.out.println(input.size());
+        System.out.println(input.toString().replaceAll("[\\[\\],]", ""));
+
     }
 
-//    private static void shiftQueue(Deque<Integer> queue, int shift){
-//        for (int i = 0; i < shift; i++) {
-//            queue.offer(queue.poll());
-//        }
-//    }
+
 }
