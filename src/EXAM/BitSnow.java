@@ -29,17 +29,9 @@ public class BitSnow {
                 long second = numbers[i + 1];
                 numbers[i] = first & second;
                 numbers[i + 1]  = first | second;
-//            System.out.println(Integer.toBinaryString(numbers.get(i)));
-//            System.out.println(Integer.toBinaryString(numbers.get(i)));
             }
         }
 
         System.out.println(Arrays.toString(numbers).replaceAll("[\\[\\]]", ""));
-
-
-//        for (Integer number : numbers) {
-//            System.out.println(Integer.toBinaryString(number));
-//        }
-
     }
 }

@@ -34,7 +34,6 @@ public class TheVLogger{
 
 
         System.out.printf("The V-Logger has a total of %d vloggers in its logs.%n", loggers.size());
-        int index = 1;
 
         List<Logger> loggerList= loggers.values().stream()
                 .sorted(Comparator.comparing(Logger::getFollowers)
@@ -54,44 +53,37 @@ public class TheVLogger{
 
     }
 
-//    The V-Logger has a total of 3 vloggers in its logs.
-//            1. VenomTheDoctor : 2 followers, 0 following
-//*  EmilConrad
-//*  Saffrona
-//2. EmilConrad : 1 followers, 1 following
-//3. Saffrona : 0 followers, 2 following
-
 }
 
 class Logger{
     String name;
     Set<String> followers;
-    Set<String> following;
+    private Set<String> following;
 
-    public Logger(String name) {
+    Logger(String name) {
         this.name = name;
         followers = new TreeSet<>();
         following = new TreeSet<>();
     }
 
-    public void addFollower(Logger logger){
+    void addFollower(Logger logger){
         if(!logger.name.equals(this.name)){
             this.followers.add(logger.name);
         }
 
     }
 
-    public void addFollowing(Logger logger){
+    void addFollowing(Logger logger){
         if(!logger.name.equals(this.name)) {
             this.following.add(logger.name);
         }
     }
 
-    public int getFollowers(){
+    int getFollowers(){
         return followers.size();
     }
 
-    public int getFollowing(){
+    int getFollowing(){
         return following.size();
     }
 
